@@ -63,14 +63,18 @@ TODO:
     * Where are they?
     * Who did we scrape?
     * wheach media outlets? logo
-    * descriptives
-    * Timerange
+        + descriptives
+    * info:
+        + Timerange
+        +
 3. Coding Framework
     * Coding Scheme
     * App
     * Voluntary Coders (tree)
     * Reliability and Validation
     * Descripives of labeled data
+    
+    
 4. Machine Learning
     * Train/Test Split
     * RNN/LSTM/MLP language models 
@@ -222,6 +226,29 @@ Some scholars have made the distinction between Alt-Right and Alt-Light:
 > Media outlets that espouse some far-right talking points while strategically excluding more extreme beliefs such as scientific racism or anti-Semitism. Example: Breitbart News.
 
 
+---
+class: inverse, center, middle
+
+## Data Collection
+
+
+---
+
+## Where to find the Alt-Right?
+
+--
+
+* Online Discussion Boards e.g. Reddit, 4chan, Discord.
+* Facebook, Twitter and YouTube 
+
+For this research we were focused on social media.
+
+
+---
+
+## Who did we scrape?
+
+
 
 ---
 
@@ -250,7 +277,46 @@ The term “alt-right,” however, fulfilled several other goals. As a neologism
 
 ---
 
-## Who did we scrape?
+## Who did we scrape? - Alt-Right
+
+
+```{r tally1, echo = F, fig.width = 10, fig.height=7, fig.align="center"}
+load("data/social_altright_plot.Rdata")
+
+social_altright_plot %>%
+  ggplot(aes(page, platform, fill = n)) +
+  geom_tile() +
+  coord_flip() +
+  theme_hc() +
+  theme(legend.position = "right", text = element_text(size = 20, face = "bold")) +
+  viridis::scale_fill_viridis("Number", option = "E", alpha = .5, direction = -1) +
+  labs(x = "", y = "") +
+  scale_y_discrete(position = "top")
+```
+
+---
+
+## Who did we scrape? - Media
+
+
+```{r tally2, echo = F, fig.width = 10, fig.height=7, fig.align="center"}
+load("data/social_media_plot.Rdata")
+
+social_media_plot %>%
+  ggplot(aes(page, platform, fill = n)) +
+  geom_tile() +
+  coord_flip() +
+  theme_hc() +
+  theme(legend.position = "right", text = element_text(size = 20, face = "bold")) +
+  viridis::scale_fill_viridis("Number", option = "E", alpha = .5, direction = -1) +
+  labs(x = "", y = "") +
+  scale_y_discrete(position = "top")
+```
+
+
+---
+
+## Who did we label?
 
 ```{r data, echo = F, eval = F}
 googlesheets::gs_auth(token = "shiny_app_token.rds")
@@ -307,8 +373,6 @@ dt %>%
   labs(x = "", y = "") +
   scale_y_discrete(position = "top")
 ```
-
-
 
 
 
