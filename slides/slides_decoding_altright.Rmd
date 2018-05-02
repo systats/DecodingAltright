@@ -13,11 +13,34 @@ output:
 ---
 
 
+<style>
+.ninety {
+  font-size: 90%;
+   }
+
+.eightyfive {
+  font-size: 85%;
+   }
+   
+.eighty {
+  font-size: 80%;
+   }
+   
+.seventyfive {
+  font-size: 75%;
+   }
+   
+.seventy {
+  font-size: 70%;
+   }
+</style>
+
+
 ```{r setup, echo = F, include=F}
 # include=FALSE
 options(htmltools.dir.version = FALSE)
 
-pacman::p_load(dplyr, ggplot2, googlesheets, openxlsx, stringr, rvest, dplyr, ggplot2, keras, mlrMBO, tidyMBO, ggthemes, Smisc, randomForest, parallelMap, emoa)
+pacman::p_load(dplyr, ggplot2, googlesheets, openxlsx, stringr, rvest, dplyr, ggplot2, keras, mlrMBO, tidyMBO, ggthemes, Smisc, randomForest, parallelMap, emoa, xaringan)
 
 knitr::opts_chunk$set(echo = F, warning = F, error = F, message = F)
 ```
@@ -73,6 +96,140 @@ class: inverse, center, middle
 
 ## Get Started
 
+---
+class: inverse, center, middle
+
+## What is the Alt-Right?
+
+---
+.eightyfive[
+
+**Milo Yiannopolous' characterization of the Alt-Right:** $^1$
+
+> *The alt-right is a movement born out of the **youthful, subversive, underground edges of the internet**. **4chan and 8chan** are hubs of alt-right activity. For years, members of these forums – political and non-political – have delighted in attention-grabbing, juvenile pranks. Long before the alt-right, 4channers turned **trolling** the national media into an in-house sport.*
+
+**Marwick and Lewis 2017**
+
+> *Term coined by Richard Spencer to describe a version of **white nationalism** that positions itself as comprised of younger, wealthier, and better-educated individuals than traditional white supremacist groups like the Klu Klux Klan. Deeply entwined with social media and staples of internet culture, like memes. Believes that **“political correctness” threatens individual liberty**. Example: Jared Taylor of the American Renaissance, Mike Cernovich of Danger and Play.*
+
+**Hawley 2017**
+
+> *Using the loosest definition, we could say the Alt-Right includes anyone with right-wing sensibilities that **rejects the mainstream conservative movement**. But there are certain common, perhaps universal attitudes within the Alt-Right. The Alt-Right is **fundamentally concerned with race**. At its core, the Alt-Right is a white-nationalist movement, even if many (perhaps most) of the people who identify with the AltRight do not care for that term. The most energetic and significant figures of the movement want to see the creation of a **white ethnostate** in North America.*
+
+]
+
+.seventy[
+
+$^1$Allum Bokhari and Milo Yiannopoulos, “An Establishment Conservative’s Guide to the Alt-Right,”
+Breitbart, March 29, 2016, http://www.breitbart.com/tech/2016/03/29/an-establishment-conservatives-guide-to-the-alt-right/.
+
+]
+
+---
+
+**What is the Alt-Right?**
+
+
+*Some key points:*
+
+--
+
+&middot; A group of loosely aligned individuals and subgroups
+
+--
+
+&middot; consists of predominatly young & male internet user
+
+--
+
+&middot; Embeddedness in internet culture (imageboards, forums, podcasts, blogs,
+memes)
+
+--
+
+&middot; Opposes both liberal activists (*“social justice warriors”*) and conservatives (*“cuckservatives”*) 
+
+--
+
+&middot; View of “political correctness” as censorship and an assault on free speech
+
+--
+
+&middot; Belief that a “culture war” exists, which the liberal left-wing is winning
+
+--
+
+&middot; Strong antipathy towards feminism and nonbinary gender identities
+
+--
+
+&middot; Promotion of nationalism and anti-globalism
+
+--
+
+&middot; Disdain for multiculturalism and immigration
+
+--
+
+&middot; Belief in intrinsic differences between people of different races and genders
+
+--
+
+&middot; Tendency to construct and spread conspiracy theories
+
+
+---
+
+
+## Groups of the Alt-Right I
+
+The Alt-Right consists of...
+
+--
+
+> an amalgam of conspiracy theorists, techno-libertarians, white nationalists, Men’s Rights advocates, trolls, anti-feminists, anti-immigration activists, and bored young people [...] they generally package themselves as anti-establishment in their reaction against multiculturalism and globalism, while
+promoting racist, anti-feminist, and anti-Semitic ideologies. (Marwick and Lewis 2017)
+
+---
+
+
+## Groups of the Alt-Right II
+
+**VENN DIAGRAMS**
+
+---
+
+
+## Groups of the Alt-Right III
+
+* Open White Supremacists (Richard Spencer, National Policy Institute, KKK)
+* Neo Nazi Movements (Daily Stormer)
+* YouTube Skeptic Community
+* Online Discussion Boards (Sections like /pol on 4chan or /r the_Donald on reddit)
+* Antifeminist YouTube (Sargon of Akkad)
+* "Menosphere" (Roosh V, Return of Kings)
+
+Sometimes very incompatible movements.
+
+Many of these segments have their own agendas, but, as this document details, share similar tactics. Furthermore, some participants in this ecosystem are organized by their beliefs (like Men’s Rights Activists), while others are organized by particular media or platforms (such as individual blogs and podcasts). Thus, the lines between these groups are always blurry and uneven.
+
+---
+
+## Alt-Right or Alt-Light
+
+Some scholars have made the distinction between Alt-Right and Alt-Light:
+
+> Media outlets that espouse some far-right talking points while strategically excluding more extreme beliefs such as scientific racism or anti-Semitism. Example: Breitbart News.
+
+
+
+---
+
+## Why Alt-Right?
+
+Alt Right was coined by Richard Spencer and self-declared white nationalist. In his view, it's a euphemism for ideologies that want to create some sort of white ethnostate.
+
+The term “alt-right,” however, fulfilled several other goals. As a neologism, it allowed ideas long seen as unacceptable to mainstream media to seep into public discourse.35 In political punditry, this is called “opening the Overton window,” or expanding the range of what is politically acceptable.36 By re-branding “white nationalism” or “white supremacy” as “the alt-right,” these groups played on the media’s fascination with novelty to give their ideas mass exposure. The anti-Semitic blog The Daily Stormer pioneered a number of the alt-right’s aesthetic elements, many of which cribbed directly from chan culture: memes, 80s sci-fi, Italo-disco/ synthpop music, and, as founder Andrew Anglin puts it, “Non-ironic Nazism masquerading as ironic Nazism.”37 Thus, white nationalism was re-engineered to appeal to millennials.
 
 ---
 
