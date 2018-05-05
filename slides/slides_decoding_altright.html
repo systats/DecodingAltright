@@ -19,6 +19,10 @@ class: center, middle, inverse, title-slide
 ---
 
 
+&lt;style&gt;
+.onehundredtwenty {
+  font-size: 120%;
+   }
 
 &lt;style&gt;
 .ninety {
@@ -47,49 +51,64 @@ class: center, middle, inverse, title-slide
 
 ## Outline
 
-TODO:
+.onehundredtwenty[
 
-* Repo Setup
-* Homepage
-* Intearctive plots
-* QR Code/Bitly
-* Hero Banner: Banner + Übergang in Charlottsville torches march/metalic
-* DecodingTheAltRight.eu
+&lt;!-- TODO: --&gt;
+
+&lt;!-- * Repo Setup --&gt;
+&lt;!-- * Homepage --&gt;
+&lt;!-- * Intearctive plots --&gt;
+&lt;!-- * QR Code/Bitly --&gt;
+&lt;!-- * Hero Banner: Banner + Übergang in Charlottsville torches march/metalic --&gt;
+&lt;!-- * DecodingTheAltRight.eu --&gt;
 
 
-1. Theoretical Setting
-    * What is the alt-right?
+&lt;!-- 1. Theoretical Setting --&gt;
+&lt;!--     * What is the alt-right? --&gt;
+&lt;!-- 2. Data Collection --&gt;
+&lt;!--     * Where are they? --&gt;
+&lt;!--     * Who did we scrape? --&gt;
+&lt;!--     * wheach media outlets? logo --&gt;
+&lt;!--         + descriptives --&gt;
+&lt;!--     * info: --&gt;
+&lt;!--         + Timerange --&gt;
+&lt;!--         + --&gt;
+&lt;!-- 3. Coding Framework --&gt;
+&lt;!--     * Coding Scheme --&gt;
+&lt;!--     * App --&gt;
+&lt;!--     * Voluntary Coders (tree) --&gt;
+&lt;!--     * Reliability and Validation --&gt;
+&lt;!--     * Descripives of labeled data --&gt;
+
+
+&lt;!-- 4. Machine Learning --&gt;
+&lt;!--     * Train/Test Split --&gt;
+&lt;!--     * RNN/LSTM/MLP language models  --&gt;
+&lt;!--     * `tidyMBO` --&gt;
+&lt;!--     * t-SNE word embedding --&gt;
+&lt;!--     * Performance tables --&gt;
+&lt;!-- 5. Predictive Analysis --&gt;
+&lt;!--     * Terror --&gt;
+&lt;!--     * Hoax: Narrative. Coparative Narratives. Frist occurance. Charelltsvill Quebec Mosque shooter.  --&gt;
+&lt;!--     * Media over time --&gt;
+&lt;!--     * ALt-Right figures over time.  --&gt;
+&lt;!-- 6. Policy Implications --&gt;
+&lt;!--     * Counter Narratives --&gt;
+&lt;!--     * AI deletion: What about uncertainty and ambiguity of language. --&gt;
+&lt;!--     * Human in the loop.  --&gt;
+&lt;!--     * Feeback loop: get personal feedback. Restcricted times. --&gt;
+&lt;!--     * Algorithemn must be repsonsive and transparent on how decisions are made. Highlight problematic content and a reason why.  --&gt;
+&lt;!--     * Cross Checking Algorithemns improve the comprehension of how the system works and we get a chance to critize its blindspots.  --&gt;
+&lt;!--     * More accountable AI programming.  --&gt;
+
+
+1. What is the Alt-Right?
 2. Data Collection
-    * Where are they?
-    * Who did we scrape?
-    * wheach media outlets? logo
-    * descriptives
-    * Timerange
 3. Coding Framework
-    * Coding Scheme
-    * App
-    * Voluntary Coders (tree)
-    * Reliability and Validation
-    * Descripives of labeled data
 4. Machine Learning
-    * Train/Test Split
-    * RNN/LSTM/MLP language models 
-    * `tidyMBO`
-    * t-SNE word embedding
-    * Performance tables
 5. Predictive Analysis
-    * Terror
-    * Hoax: Narrative. Coparative Narratives. Frist occurance. Charelltsvill Quebec Mosque shooter. 
-    * Media over time
-    * ALt-Right figures over time. 
 6. Policy Implications
-    * Counter Narratives
-    * AI deletion: What about uncertainty and ambiguity of language.
-    * Human in the loop. 
-    * Feeback loop: get personal feedback. Restcricted times.
-    * Algorithemn must be repsonsive and transparent on how decisions are made. Highlight problematic content and a reason why. 
-    * Cross Checking Algorithemns improve the comprehension of how the system works and we get a chance to critize its blindspots. 
-    * More accountable AI programming. 
+]
 
 ---
 class: inverse, center, middle
@@ -101,20 +120,29 @@ class: inverse, center, middle
 
 ## What is the Alt-Right?
 
+&lt;!-- + Term coined by Richard Spencer --&gt;
+
+&lt;!-- + Goals --&gt;
+&lt;!--     * allowed ideas long seen as unacceptable to mainstream media to seep into public discourse (opening the Overton window) --&gt;
+&lt;!--     * By re-branding “white nationalism” or “white supremacy” as “the alt-right,” these groups played on the media’s fascination with novelty to give their ideas mass exposure --&gt;
+&lt;!--     * As Daily Stormer founder Andrew Anglin puts it, “Non-ironic Nazism masquerading as ironic Nazism.” --&gt;
+
+&lt;!-- Why use it? The Nazis called themselves national socialists and we shouldn't call them socialists but they were a distinct phenomenon. They're also more diverse as we shall see --&gt;
+
 ---
 .eightyfive[
 
 **Milo Yiannopolous' characterization of the Alt-Right:** `\(^1\)`
 
-&gt; *The alt-right is a movement born out of the **youthful, subversive, underground edges of the internet**. **4chan and 8chan** are hubs of alt-right activity. For years, members of these forums – political and non-political – have delighted in attention-grabbing, juvenile pranks. Long before the alt-right, 4channers turned **trolling** the national media into an in-house sport.*
+&gt; *The alt-right is a movement born out of the youthful, subversive, **underground edges of the internet**. 4chan and 8chan are hubs of alt-right activity. For years, members of these forums – political and non-political – have delighted in **attention-grabbing, juvenile pranks**. Long before the alt-right, 4channers turned **trolling** the national media into an in-house sport.*
 
 **Marwick and Lewis 2017**
 
-&gt; *Term coined by Richard Spencer to describe a version of **white nationalism** that positions itself as comprised of younger, wealthier, and better-educated individuals than traditional white supremacist groups like the Klu Klux Klan. Deeply entwined with social media and staples of internet culture, like memes. Believes that **“political correctness” threatens individual liberty**. Example: Jared Taylor of the American Renaissance, Mike Cernovich of Danger and Play.*
+&gt; *Term coined by Richard Spencer to describe a version of **white nationalism** that positions itself as comprised of **younger, wealthier, and better-educated individuals** than traditional white supremacist groups like the Klu Klux Klan. Deeply entwined with social media and staples of **internet culture, like memes**. Believes that **“political correctness” threatens individual liberty**. Example: Jared Taylor of the American Renaissance, Mike Cernovich of Danger and Play.*
 
 **Hawley 2017**
 
-&gt; *Using the loosest definition, we could say the Alt-Right includes anyone with right-wing sensibilities that **rejects the mainstream conservative movement**. But there are certain common, perhaps universal attitudes within the Alt-Right. The Alt-Right is **fundamentally concerned with race**. At its core, the Alt-Right is a white-nationalist movement, even if many (perhaps most) of the people who identify with the AltRight do not care for that term. The most energetic and significant figures of the movement want to see the creation of a **white ethnostate** in North America.*
+&gt; *Using the loosest definition, we could say the Alt-Right includes anyone with right-wing sensibilities that **rejects the mainstream conservative movement**. But there are certain common, perhaps universal attitudes within the Alt-Right. The Alt-Right is **fundamentally concerned with race**. At its core, the Alt-Right is a white-nationalist movement, even if many (perhaps most) of the people who identify with the Alt-Right do not care for that term. The most energetic and significant figures of the movement want to see the creation of a **white ethnostate** in North America.*
 
 ]
 
@@ -127,55 +155,34 @@ Breitbart, March 29, 2016, http://www.breitbart.com/tech/2016/03/29/an-establish
 
 ---
 
-**What is the Alt-Right?**
+## What is the Alt-Right?
 
 
-*Some key points:*
-
---
-
-&amp;middot; A group of loosely aligned individuals and subgroups
+A group of loosely aligned individuals and subgroups that predominatly consist of white, young &amp; male frequent internet user. Although adherence to these beliefs varies, these are some common themes within the Alt-Right:
 
 --
 
-&amp;middot; consists of predominatly young &amp; male internet user
++ Antipathy towards both liberals (*“social justice warriors”*) and conservatives (*“cuckservatives”*) 
 
 --
 
-&amp;middot; Embeddedness in internet culture (imageboards, forums, podcasts, blogs,
-memes)
++ Fighting a *"culture war"* against perceived liberal consensus within the establishment
 
 --
 
-&amp;middot; Opposes both liberal activists (*“social justice warriors”*) and conservatives (*“cuckservatives”*) 
++ Belief that freedom of speech is being threatened by *"political correctness"*
 
 --
 
-&amp;middot; View of “political correctness” as censorship and an assault on free speech
++ Strong animosity towards feminism, multiculturalism and immigration (*"cultural marxism"*)
 
 --
 
-&amp;middot; Belief that a “culture war” exists, which the liberal left-wing is winning
++ Belief in biological differences inbetween races and genders that justifies seperate treatment
 
 --
 
-&amp;middot; Strong antipathy towards feminism and nonbinary gender identities
-
---
-
-&amp;middot; Promotion of nationalism and anti-globalism
-
---
-
-&amp;middot; Disdain for multiculturalism and immigration
-
---
-
-&amp;middot; Belief in intrinsic differences between people of different races and genders
-
---
-
-&amp;middot; Tendency to construct and spread conspiracy theories
++ Ambigious and troll-like behaviour as to ensure *plausible deniability*
 
 
 ---
@@ -187,33 +194,66 @@ The Alt-Right consists of...
 
 --
 
-&gt; an amalgam of conspiracy theorists, techno-libertarians, white nationalists, Men’s Rights advocates, trolls, anti-feminists, anti-immigration activists, and bored young people [...] they generally package themselves as anti-establishment in their reaction against multiculturalism and globalism, while
-promoting racist, anti-feminist, and anti-Semitic ideologies. (Marwick and Lewis 2017)
+&gt; an amalgam of conspiracy theorists, techno-libertarians, white nationalists, Men’s Rights advocates, trolls, anti-feminists, anti-immigration activists, and bored young people [...]. [S]ome participants in this ecosystem are organized by their beliefs (like *"Men’s Rights Activists"*), while others are organized by particular media or platforms (such as individual blogs and podcasts). Thus, the lines between these groups are always blurry and uneven (Marwick and Lewis 2017). 
 
 ---
 
 
 ## Groups of the Alt-Right II
 
-**VENN DIAGRAMS**
+&lt;img src="images/flower1.png"&gt;
+
+---
+## Groups of the Alt-Right II
+
+&lt;img src="images/flower2.png"&gt;
+
+---
+## Groups of the Alt-Right II
+
+&lt;img src="images/flower3.png"&gt;
+
+---
+## Groups of the Alt-Right II
+
+&lt;img src="images/flower4.png"&gt;
+
+---
+## Groups of the Alt-Right II
+
+&lt;img src="images/flower5.png"&gt;
+
+---
+## Groups of the Alt-Right II
+
+&lt;img src="images/flower6.png"&gt;
+
+---
+## Groups of the Alt-Right II
+
+&lt;img src="images/flower7.png"&gt;
+
+&lt;!-- bps 324.519 Abonnenten --&gt;
+&lt;!-- 791.744 Abonnenten --&gt;
+
+
 
 ---
 
 
-## Groups of the Alt-Right III
+&lt;!-- ## Groups of the Alt-Right III --&gt;
 
-* Open White Supremacists (Richard Spencer, National Policy Institute, KKK)
-* Neo Nazi Movements (Daily Stormer)
-* YouTube Skeptic Community
-* Online Discussion Boards (Sections like /pol on 4chan or /r the_Donald on reddit)
-* Antifeminist YouTube (Sargon of Akkad)
-* "Menosphere" (Roosh V, Return of Kings)
+&lt;!-- * Open White Supremacists (Richard Spencer, National Policy Institute, KKK) --&gt;
+&lt;!-- * Neo Nazi Movements (Daily Stormer, Fash the Nation) --&gt;
+&lt;!-- * YouTube Skeptic Community --&gt;
+&lt;!-- * Online Discussion Boards (Sections like /pol on 4chan or /r the_Donald on reddit) --&gt;
+&lt;!-- * Antifeminist YouTube (Sargon of Akkad) --&gt;
+&lt;!-- * "Menosphere" (Roosh V, Return of Kings) --&gt;
 
-Sometimes very incompatible movements.
+&lt;!-- Sometimes very incompatible movements. --&gt;
 
-Many of these segments have their own agendas, but, as this document details, share similar tactics. Furthermore, some participants in this ecosystem are organized by their beliefs (like Men’s Rights Activists), while others are organized by particular media or platforms (such as individual blogs and podcasts). Thus, the lines between these groups are always blurry and uneven.
 
----
+&lt;!-- --- --&gt;
 
 ## Alt-Right or Alt-Light
 
@@ -222,16 +262,225 @@ Some scholars have made the distinction between Alt-Right and Alt-Light:
 &gt; Media outlets that espouse some far-right talking points while strategically excluding more extreme beliefs such as scientific racism or anti-Semitism. Example: Breitbart News.
 
 
+---
+class: inverse, center, middle
+
+## Data Collection
+
 
 ---
 
-## Why Alt-Right?
+## Where to find the Alt-Right?
 
-Alt Right was coined by Richard Spencer and self-declared white nationalist. In his view, it's a euphemism for ideologies that want to create some sort of white ethnostate.
+--
 
-The term “alt-right,” however, fulfilled several other goals. As a neologism, it allowed ideas long seen as unacceptable to mainstream media to seep into public discourse.35 In political punditry, this is called “opening the Overton window,” or expanding the range of what is politically acceptable.36 By re-branding “white nationalism” or “white supremacy” as “the alt-right,” these groups played on the media’s fascination with novelty to give their ideas mass exposure. The anti-Semitic blog The Daily Stormer pioneered a number of the alt-right’s aesthetic elements, many of which cribbed directly from chan culture: memes, 80s sci-fi, Italo-disco/ synthpop music, and, as founder Andrew Anglin puts it, “Non-ironic Nazism masquerading as ironic Nazism.”37 Thus, white nationalism was re-engineered to appeal to millennials.
+* Online Discussion Boards e.g. Reddit, 4chan, Discord.
+* Facebook, Twitter and YouTube 
+
+For this research we were focused on social media. We collected millions of comment that were left under various Alt-Right network hubs on these platforms for the entirety of the year 2017. In addition, we also accessed the commentaries under popular (American) news outlets over the same timerange.
 
 ---
+
+## Who did we scrape? - Alt-Right
+
+
+&lt;img src="slides_decoding_altright_files/figure-html/tally1-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Who did we scrape? - Media
+
+
+&lt;img src="slides_decoding_altright_files/figure-html/tally2-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: inverse, center, middle
+
+## Coding Framework
+
+---
+
+## Sampling &amp; Data Preperation
+
+As a first step we sampled 30.000 comments from the Alt-Right sample. We tried to make sure that each YouTube Video, Facebook or Twitter profile is equally represented in this subsample.
+
+Next, we did some other things to the data?
+
+Goal:
+
+&gt; Identify Alt-Right commentary on social media and its spread into mainstream media
+
+This could include the spread of hoaxes and fake news or Alt-Right reaction to terrorist attacks.
+
+This will be done with a machine learning process that necessitates a training and a test dataset.
+
+In order to account for the multidimensionality of the Alt-Right sphere, we decided to use an extensive coding scheme that we will present with the app.
+
+In total we labeled 7580 comments and tweets with the help of 13 individual coders.
+
+---
+
+class: inverse, center, middle
+
+[Link to Coding App](https://favstats.shinyapps.io/shiny_label_altright/)
+
+---
+
+class: center, middle
+
+&lt;img src="images/app1.png"&gt;
+
+---
+
+class: center, middle
+
+&lt;img src="images/app2.png"&gt;
+
+---
+
+class: center, middle
+
+&lt;img src="images/app3.png"&gt;
+
+---
+
+class: center, middle
+
+&lt;img src="images/app4.jpg"&gt;
+
+
+---
+
+class: center, middle
+
+&lt;img src="images/app5.png"&gt;
+
+---
+
+## Who did we label?
+
+
+
+
+
+&lt;img src="slides_decoding_altright_files/figure-html/tally-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+## Reliability and Validation
+
+
+**TODO**
+
+---
+
+## Descriptives of Labeled Data
+
+
+&lt;img src="slides_decoding_altright_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+
+```
+## 
+##   fb   tw   yt 
+## 1751 2728 3101
+```
+
+---
+
+## Descriptives of Labeled Data
+
+
+&lt;img src="slides_decoding_altright_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Descriptives of Labeled Data
+
+![](slides_decoding_altright_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+
+---
+
+## Descripives of Labeled Data
+
+**TODO**
+
+
+---
+
+class: inverse, center, middle
+
+
+## Machine Learning
+
+
+---
+
+## Machine Learning
+
+**TODO**
+
+---
+
+
+class: inverse, center, middle
+
+## Predictive Analysis
+
+
+---
+
+## Predictive Analysis
+
+**TODO**
+
+---
+
+class: inverse, center, middle
+
+
+## Policy Implications
+
+---
+
+
+## Policy Implications
+
+* Counter Narratives
+* Taking complaints about ambiguity of hate speech seriously?
+* Account for the *multidimensionality* of extremism
+    + extremism is not only limited to hate speech, it's also ideological
+* AI deletion: What about uncertainty and ambiguity of language.
+* Human in the loop. 
+* Feeback loop: get personal feedback. Restcricted times.
+* Algorithemn must be repsonsive and transparent on how decisions are made. Highlight problematic content and a reason why. 
+* Cross Checking Algorithemns improve the comprehension of how the system works and we get a chance to critize its blindspots. 
+* More accountable AI programming. 
+
+
+---
+
+class: inverse, center, middle
+
+
+## Thanks for Listening!
+
+[**Data and Code can be found in this GitHub Repository**](https://www.splcenter.org/fighting-hate/extremist-files/ideology/alt-right)
+
+---
+
+## References
+
+Hawley, G. (2017). Making Sense of the Alt-right. Columbia University Press.
+
+Marwick, A., &amp; Lewis, R. (2017). Media manipulation and disinformation online. New York: Data &amp; Society Research Institute.
+
+
+
+---
+
 
 ## Fallbacks
 
@@ -243,27 +492,6 @@ The term “alt-right,” however, fulfilled several other goals. As a neologism
 * Gender
 * Terror
 * Story tracing/hoax
-  
-
-
-
-
----
-
-## Who did we scrape?
-
-
-
-
-
-
-&lt;img src="slides_decoding_altright_files/figure-html/tally-1.png" style="display: block; margin: auto;" /&gt;
-
-
-
-
-
----
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

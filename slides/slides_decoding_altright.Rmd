@@ -12,6 +12,10 @@ output:
       countIncrementalSlides: false
 ---
 
+<style>
+.onehundredtwenty {
+  font-size: 120%;
+   }
 
 <style>
 .ninety {
@@ -43,53 +47,70 @@ options(htmltools.dir.version = FALSE)
 pacman::p_load(dplyr, ggplot2, googlesheets, openxlsx, stringr, rvest, dplyr, ggplot2, keras, mlrMBO, tidyMBO, ggthemes, Smisc, randomForest, parallelMap, emoa, xaringan)
 
 knitr::opts_chunk$set(echo = F, warning = F, error = F, message = F)
+
+load("data/dt.Rdata")
 ```
 
 ## Outline
 
-TODO:
+.onehundredtwenty[
 
-* Repo Setup
-* Homepage
-* Intearctive plots
-* QR Code/Bitly
-* Hero Banner: Banner + Übergang in Charlottsville torches march/metalic
-* DecodingTheAltRight.eu
+<!-- TODO: -->
+
+<!-- * Repo Setup -->
+<!-- * Homepage -->
+<!-- * Intearctive plots -->
+<!-- * QR Code/Bitly -->
+<!-- * Hero Banner: Banner + Übergang in Charlottsville torches march/metalic -->
+<!-- * DecodingTheAltRight.eu -->
 
 
-1. Theoretical Setting
-    * What is the alt-right?
+<!-- 1. Theoretical Setting -->
+<!--     * What is the alt-right? -->
+<!-- 2. Data Collection -->
+<!--     * Where are they? -->
+<!--     * Who did we scrape? -->
+<!--     * wheach media outlets? logo -->
+<!--         + descriptives -->
+<!--     * info: -->
+<!--         + Timerange -->
+<!--         + -->
+<!-- 3. Coding Framework -->
+<!--     * Coding Scheme -->
+<!--     * App -->
+<!--     * Voluntary Coders (tree) -->
+<!--     * Reliability and Validation -->
+<!--     * Descripives of labeled data -->
+
+
+<!-- 4. Machine Learning -->
+<!--     * Train/Test Split -->
+<!--     * RNN/LSTM/MLP language models  -->
+<!--     * `tidyMBO` -->
+<!--     * t-SNE word embedding -->
+<!--     * Performance tables -->
+<!-- 5. Predictive Analysis -->
+<!--     * Terror -->
+<!--     * Hoax: Narrative. Coparative Narratives. Frist occurance. Charelltsvill Quebec Mosque shooter.  -->
+<!--     * Media over time -->
+<!--     * ALt-Right figures over time.  -->
+<!-- 6. Policy Implications -->
+<!--     * Counter Narratives -->
+<!--     * AI deletion: What about uncertainty and ambiguity of language. -->
+<!--     * Human in the loop.  -->
+<!--     * Feeback loop: get personal feedback. Restcricted times. -->
+<!--     * Algorithemn must be repsonsive and transparent on how decisions are made. Highlight problematic content and a reason why.  -->
+<!--     * Cross Checking Algorithemns improve the comprehension of how the system works and we get a chance to critize its blindspots.  -->
+<!--     * More accountable AI programming.  -->
+
+
+1. What is the Alt-Right?
 2. Data Collection
-    * Where are they?
-    * Who did we scrape?
-    * wheach media outlets? logo
-    * descriptives
-    * Timerange
 3. Coding Framework
-    * Coding Scheme
-    * App
-    * Voluntary Coders (tree)
-    * Reliability and Validation
-    * Descripives of labeled data
 4. Machine Learning
-    * Train/Test Split
-    * RNN/LSTM/MLP language models 
-    * `tidyMBO`
-    * t-SNE word embedding
-    * Performance tables
 5. Predictive Analysis
-    * Terror
-    * Hoax: Narrative. Coparative Narratives. Frist occurance. Charelltsvill Quebec Mosque shooter. 
-    * Media over time
-    * ALt-Right figures over time. 
 6. Policy Implications
-    * Counter Narratives
-    * AI deletion: What about uncertainty and ambiguity of language.
-    * Human in the loop. 
-    * Feeback loop: get personal feedback. Restcricted times.
-    * Algorithemn must be repsonsive and transparent on how decisions are made. Highlight problematic content and a reason why. 
-    * Cross Checking Algorithemns improve the comprehension of how the system works and we get a chance to critize its blindspots. 
-    * More accountable AI programming. 
+]
 
 ---
 class: inverse, center, middle
@@ -101,20 +122,29 @@ class: inverse, center, middle
 
 ## What is the Alt-Right?
 
+<!-- + Term coined by Richard Spencer -->
+
+<!-- + Goals -->
+<!--     * allowed ideas long seen as unacceptable to mainstream media to seep into public discourse (opening the Overton window) -->
+<!--     * By re-branding “white nationalism” or “white supremacy” as “the alt-right,” these groups played on the media’s fascination with novelty to give their ideas mass exposure -->
+<!--     * As Daily Stormer founder Andrew Anglin puts it, “Non-ironic Nazism masquerading as ironic Nazism.” -->
+
+<!-- Why use it? The Nazis called themselves national socialists and we shouldn't call them socialists but they were a distinct phenomenon. They're also more diverse as we shall see -->
+
 ---
 .eightyfive[
 
 **Milo Yiannopolous' characterization of the Alt-Right:** $^1$
 
-> *The alt-right is a movement born out of the **youthful, subversive, underground edges of the internet**. **4chan and 8chan** are hubs of alt-right activity. For years, members of these forums – political and non-political – have delighted in attention-grabbing, juvenile pranks. Long before the alt-right, 4channers turned **trolling** the national media into an in-house sport.*
+> *The alt-right is a movement born out of the youthful, subversive, **underground edges of the internet**. 4chan and 8chan are hubs of alt-right activity. For years, members of these forums – political and non-political – have delighted in **attention-grabbing, juvenile pranks**. Long before the alt-right, 4channers turned **trolling** the national media into an in-house sport.*
 
 **Marwick and Lewis 2017**
 
-> *Term coined by Richard Spencer to describe a version of **white nationalism** that positions itself as comprised of younger, wealthier, and better-educated individuals than traditional white supremacist groups like the Klu Klux Klan. Deeply entwined with social media and staples of internet culture, like memes. Believes that **“political correctness” threatens individual liberty**. Example: Jared Taylor of the American Renaissance, Mike Cernovich of Danger and Play.*
+> *Term coined by Richard Spencer to describe a version of **white nationalism** that positions itself as comprised of **younger, wealthier, and better-educated individuals** than traditional white supremacist groups like the Klu Klux Klan. Deeply entwined with social media and staples of **internet culture, like memes**. Believes that **“political correctness” threatens individual liberty**. Example: Jared Taylor of the American Renaissance, Mike Cernovich of Danger and Play.*
 
 **Hawley 2017**
 
-> *Using the loosest definition, we could say the Alt-Right includes anyone with right-wing sensibilities that **rejects the mainstream conservative movement**. But there are certain common, perhaps universal attitudes within the Alt-Right. The Alt-Right is **fundamentally concerned with race**. At its core, the Alt-Right is a white-nationalist movement, even if many (perhaps most) of the people who identify with the AltRight do not care for that term. The most energetic and significant figures of the movement want to see the creation of a **white ethnostate** in North America.*
+> *Using the loosest definition, we could say the Alt-Right includes anyone with right-wing sensibilities that **rejects the mainstream conservative movement**. But there are certain common, perhaps universal attitudes within the Alt-Right. The Alt-Right is **fundamentally concerned with race**. At its core, the Alt-Right is a white-nationalist movement, even if many (perhaps most) of the people who identify with the Alt-Right do not care for that term. The most energetic and significant figures of the movement want to see the creation of a **white ethnostate** in North America.*
 
 ]
 
@@ -127,55 +157,34 @@ Breitbart, March 29, 2016, http://www.breitbart.com/tech/2016/03/29/an-establish
 
 ---
 
-**What is the Alt-Right?**
+## What is the Alt-Right?
 
 
-*Some key points:*
-
---
-
-&middot; A group of loosely aligned individuals and subgroups
+A group of loosely aligned individuals and subgroups that predominatly consist of white, young & male frequent internet user. Although adherence to these beliefs varies, these are some common themes within the Alt-Right:
 
 --
 
-&middot; consists of predominatly young & male internet user
++ Antipathy towards both liberals (*“social justice warriors”*) and conservatives (*“cuckservatives”*) 
 
 --
 
-&middot; Embeddedness in internet culture (imageboards, forums, podcasts, blogs,
-memes)
++ Fighting a *"culture war"* against perceived liberal consensus within the establishment
 
 --
 
-&middot; Opposes both liberal activists (*“social justice warriors”*) and conservatives (*“cuckservatives”*) 
++ Belief that freedom of speech is being threatened by *"political correctness"*
 
 --
 
-&middot; View of “political correctness” as censorship and an assault on free speech
++ Strong animosity towards feminism, multiculturalism and immigration (*"cultural marxism"*)
 
 --
 
-&middot; Belief that a “culture war” exists, which the liberal left-wing is winning
++ Belief in biological differences inbetween races and genders that justifies seperate treatment
 
 --
 
-&middot; Strong antipathy towards feminism and nonbinary gender identities
-
---
-
-&middot; Promotion of nationalism and anti-globalism
-
---
-
-&middot; Disdain for multiculturalism and immigration
-
---
-
-&middot; Belief in intrinsic differences between people of different races and genders
-
---
-
-&middot; Tendency to construct and spread conspiracy theories
++ Ambigious and troll-like behaviour as to ensure *plausible deniability*
 
 
 ---
@@ -187,33 +196,66 @@ The Alt-Right consists of...
 
 --
 
-> an amalgam of conspiracy theorists, techno-libertarians, white nationalists, Men’s Rights advocates, trolls, anti-feminists, anti-immigration activists, and bored young people [...] they generally package themselves as anti-establishment in their reaction against multiculturalism and globalism, while
-promoting racist, anti-feminist, and anti-Semitic ideologies. (Marwick and Lewis 2017)
+> an amalgam of conspiracy theorists, techno-libertarians, white nationalists, Men’s Rights advocates, trolls, anti-feminists, anti-immigration activists, and bored young people [...]. [S]ome participants in this ecosystem are organized by their beliefs (like *"Men’s Rights Activists"*), while others are organized by particular media or platforms (such as individual blogs and podcasts). Thus, the lines between these groups are always blurry and uneven (Marwick and Lewis 2017). 
 
 ---
 
 
 ## Groups of the Alt-Right II
 
-**VENN DIAGRAMS**
+<img src="images/flower1.png">
+
+---
+## Groups of the Alt-Right II
+
+<img src="images/flower2.png">
+
+---
+## Groups of the Alt-Right II
+
+<img src="images/flower3.png">
+
+---
+## Groups of the Alt-Right II
+
+<img src="images/flower4.png">
+
+---
+## Groups of the Alt-Right II
+
+<img src="images/flower5.png">
+
+---
+## Groups of the Alt-Right II
+
+<img src="images/flower6.png">
+
+---
+## Groups of the Alt-Right II
+
+<img src="images/flower7.png">
+
+<!-- bps 324.519 Abonnenten -->
+<!-- 791.744 Abonnenten -->
+
+
 
 ---
 
 
-## Groups of the Alt-Right III
+<!-- ## Groups of the Alt-Right III -->
 
-* Open White Supremacists (Richard Spencer, National Policy Institute, KKK)
-* Neo Nazi Movements (Daily Stormer)
-* YouTube Skeptic Community
-* Online Discussion Boards (Sections like /pol on 4chan or /r the_Donald on reddit)
-* Antifeminist YouTube (Sargon of Akkad)
-* "Menosphere" (Roosh V, Return of Kings)
+<!-- * Open White Supremacists (Richard Spencer, National Policy Institute, KKK) -->
+<!-- * Neo Nazi Movements (Daily Stormer, Fash the Nation) -->
+<!-- * YouTube Skeptic Community -->
+<!-- * Online Discussion Boards (Sections like /pol on 4chan or /r the_Donald on reddit) -->
+<!-- * Antifeminist YouTube (Sargon of Akkad) -->
+<!-- * "Menosphere" (Roosh V, Return of Kings) -->
 
-Sometimes very incompatible movements.
+<!-- Sometimes very incompatible movements. -->
 
-Many of these segments have their own agendas, but, as this document details, share similar tactics. Furthermore, some participants in this ecosystem are organized by their beliefs (like Men’s Rights Activists), while others are organized by particular media or platforms (such as individual blogs and podcasts). Thus, the lines between these groups are always blurry and uneven.
 
----
+<!-- --- -->
 
 ## Alt-Right or Alt-Light
 
@@ -222,35 +264,176 @@ Some scholars have made the distinction between Alt-Right and Alt-Light:
 > Media outlets that espouse some far-right talking points while strategically excluding more extreme beliefs such as scientific racism or anti-Semitism. Example: Breitbart News.
 
 
-
 ---
+class: inverse, center, middle
 
-## Why Alt-Right?
-
-Alt Right was coined by Richard Spencer and self-declared white nationalist. In his view, it's a euphemism for ideologies that want to create some sort of white ethnostate.
-
-The term “alt-right,” however, fulfilled several other goals. As a neologism, it allowed ideas long seen as unacceptable to mainstream media to seep into public discourse.35 In political punditry, this is called “opening the Overton window,” or expanding the range of what is politically acceptable.36 By re-branding “white nationalism” or “white supremacy” as “the alt-right,” these groups played on the media’s fascination with novelty to give their ideas mass exposure. The anti-Semitic blog The Daily Stormer pioneered a number of the alt-right’s aesthetic elements, many of which cribbed directly from chan culture: memes, 80s sci-fi, Italo-disco/ synthpop music, and, as founder Andrew Anglin puts it, “Non-ironic Nazism masquerading as ironic Nazism.”37 Thus, white nationalism was re-engineered to appeal to millennials.
-
----
-
-## Fallbacks
-
-* Keyword counting
-* Official racesim dictionaries.
-* Network analysis.
-    + Link share network
-    + user community
-* Gender
-* Terror
-* Story tracing/hoax
-  
-
-
+## Data Collection
 
 
 ---
 
-## Who did we scrape?
+## Where to find the Alt-Right?
+
+--
+
+* Online Discussion Boards e.g. Reddit, 4chan, Discord.
+* Facebook, Twitter and YouTube 
+
+For this research we were focused on social media. We collected millions of comment that were left under various Alt-Right network hubs on these platforms for the entirety of the year 2017. In addition, we also accessed the commentaries under popular (American) news outlets over the same timerange.
+
+---
+
+## Who did we scrape? - Alt-Right
+
+
+```{r tally1, echo = F, fig.width = 10, fig.height=7, fig.align="center"}
+load("data/social_altright_plot.Rdata")
+
+
+data.frame(platform = "YouTube", pl1 = 3, 
+           page = as.factor("Sargon of Akkad"),
+           n = 611369) %>% 
+  bind_rows(social_altright_plot) %>%
+  mutate(page = forcats::fct_recode(page, 
+                                    `Milo Yiannopoulos` = "milo",
+                                    `Alex Jones/Infowars` = "alexjones",
+                                    `Mike Cernovich` = "cernovich",
+                                    `Paul Joseph Watson` = "pjw",
+                                    `Breitbart` = "breitbart",
+                                    `Steven Crowder` = "crowder",
+                                    `Rebel Media` = "TheRebelTV",
+                                    `Blaire White` = "blaire_white",
+                                    `Tommy Robinson` = "robinson",
+                                    `Stefan Molyneux/Freedomain Radio` = "molymeme",
+                                    `Red Ice TV` = "redicetv",
+                                    `Black Pigeon Speaks` = "bps",
+                                    `Styxhexenhammer` = "styxenhammer",
+                                    `Lauren Southern` = "lauren",
+                                    `Baked Alaska` = "bakedalaska",
+                                    `Return of Kings` = "returnofkings",
+                                    `VDARE` = "vdare",
+                                    `Roosh V` = "roosh",
+                                    `RamZPaul` = "ramzpaul",
+                                    `Brittany Pettibone` = "pettibone",
+                                    `Arktos Media` = "arktosmedia",
+                                    `Gavin McInnes` = "gavin",
+                                    `The National Policy Institute/Radix Journal` = "NPIRadix",
+                                    `Millenial Woes` = "mw",
+                                    `Roaming Millenial` = "roaming",
+                                    `Richard Spencer` = "richardspencer",
+                                    `Identity Evropa` = "europa",
+                                    `Paul Elam` = "paulelam",
+                                    `AltRight.com` = "altright",
+                                    `Tara McCarthy` = "tara",
+                                    `Counter-Currents` = "countercurr",
+                                    `Ann Coulter` = "anncoulter",
+                                    `American Renaissance` = "americanrenaissance"
+                                    )) %>% 
+  ggplot(aes(page, platform, fill = n)) +
+  geom_tile() +
+  coord_flip() +
+  theme_hc() +
+  theme(legend.position = "right", text = element_text(size = 20, face = "bold")) +
+  viridis::scale_fill_viridis("Number", option = "E", alpha = .5, direction = -1) +
+  labs(x = "", y = "") +
+  scale_y_discrete(position = "top")
+
+
+```
+
+---
+
+## Who did we scrape? - Media
+
+
+```{r tally2, echo = F, fig.width = 10, fig.height=7, fig.align="center"}
+load("data/social_media_plot.Rdata")
+
+social_media_plot %>%
+    mutate(page = forcats::fct_recode(page, 
+                                    `CNN` = "cnn",
+                                    `ABC` = "abc",
+                                    `New York Times` = "nyt",
+                                    `Washington Post` = "wapo",
+                                    `Fox News` = "foxnews"
+                                    )) %>% 
+  ggplot(aes(page, platform, fill = n)) +
+  geom_tile() +
+  coord_flip() +
+  theme_hc() +
+  theme(legend.position = "right", text = element_text(size = 20, face = "bold")) +
+  viridis::scale_fill_viridis("Number", option = "E", alpha = .5, direction = -1) +
+  labs(x = "", y = "") +
+  scale_y_discrete(position = "top")
+```
+
+
+---
+
+class: inverse, center, middle
+
+## Coding Framework
+
+---
+
+## Sampling & Data Preperation
+
+As a first step we sampled 30.000 comments from the Alt-Right sample. We tried to make sure that each YouTube Video, Facebook or Twitter profile is equally represented in this subsample.
+
+Next, we did some other things to the data?
+
+Goal:
+
+> Identify Alt-Right commentary on social media and its spread into mainstream media
+
+This could include the spread of hoaxes and fake news or Alt-Right reaction to terrorist attacks.
+
+This will be done with a machine learning process that necessitates a training and a test dataset.
+
+In order to account for the multidimensionality of the Alt-Right sphere, we decided to use an extensive coding scheme that we will present with the app.
+
+In total we labeled `r nrow(dt)` comments and tweets with the help of `r length(unique(dt$coder))` individual coders.
+
+---
+
+class: inverse, center, middle
+
+[Link to Coding App](https://favstats.shinyapps.io/shiny_label_altright/)
+
+---
+
+class: center, middle
+
+<img src="images/app1.png">
+
+---
+
+class: center, middle
+
+<img src="images/app2.png">
+
+---
+
+class: center, middle
+
+<img src="images/app3.png">
+
+---
+
+class: center, middle
+
+<img src="images/app4.jpg">
+
+
+---
+
+class: center, middle
+
+<img src="images/app5.png">
+
+---
+
+## Who did we label?
 
 ```{r data, echo = F, eval = F}
 googlesheets::gs_auth(token = "shiny_app_token.rds")
@@ -281,7 +464,6 @@ dt <- df_coded %>%
 
 
 
-
 ```{r tally, echo = F, fig.width = 10, fig.height=7, fig.align="center"}
 load("data/dt.Rdata")
 dt %>%
@@ -298,6 +480,41 @@ dt %>%
   ) %>%
   filter(!is.na(page)) %>%
   arrange(platform, desc(n)) %>%
+  mutate(page = forcats::fct_recode(page, 
+                                    `Milo Yiannopoulos` = "milo",
+                                    `Alex Jones/Infowars` = "alexjones",
+                                    `Mike Cernovich` = "cernovich",
+                                    `Paul Joseph Watson` = "pjw",
+                                    `Breitbart` = "breitbart",
+                                    `Steven Crowder` = "crowder",
+                                    `Rebel Media` = "TheRebelTV",
+                                    `Blaire White` = "blaire_white",
+                                    `Tommy Robinson` = "robinson",
+                                    `Stefan Molyneux/Freedomain Radio` = "molymeme",
+                                    `Red Ice TV` = "redicetv",
+                                    `Black Pigeon Speaks` = "bps",
+                                    `Styxhexenhammer` = "styxenhammer",
+                                    `Lauren Southern` = "lauren",
+                                    `Baked Alaska` = "bakedalaska",
+                                    `Return of Kings` = "returnofkings",
+                                    `VDARE` = "vdare",
+                                    `Roosh V` = "roosh",
+                                    `RamZPaul` = "ramzpaul",
+                                    `Brittany Pettibone` = "pettibone",
+                                    `Arktos Media` = "arktosmedia",
+                                    `Gavin McInnes` = "gavin",
+                                    `The National Policy Institute/Radix Journal` = "NPIRadix",
+                                    `Millenial Woes` = "mw",
+                                    `Roaming Millenial` = "roaming",
+                                    `Richard Spencer` = "richardspencer",
+                                    `Identity Evropa` = "europa",
+                                    `Paul Elam` = "paulelam",
+                                    `AltRight.com` = "altright",
+                                    `Tara McCarthy` = "tara",
+                                    `Counter-Currents` = "countercurr",
+                                    `Ann Coulter` = "anncoulter",
+                                    `American Renaissance` = "americanrenaissance"
+                                    )) %>% 
   ggplot(aes(page, platform, fill = n)) +
   geom_tile() +
   coord_flip() +
@@ -310,18 +527,284 @@ dt %>%
 
 
 
+## Reliability and Validation
+
+
+**TODO**
+
+---
+
+## Descriptives of Labeled Data
+
+
+```{r, echo = F, fig.width = 10, fig.height=7, fig.align="center"}
+dt %>% 
+  group_by(platform) %>%
+  summarize_all(mean) %>%
+  dplyr::select(platform, identity:left, anti_fem:anti_mus) %>% 
+  tidyr::gather("key", "mean", -platform) %>% 
+#  mutate(type = "mean") %>% 
+  left_join(dt %>% 
+    group_by(platform) %>%
+    summarize_all(sd) %>%
+    dplyr::select(platform, identity:left, anti_fem:anti_mus) %>% 
+    tidyr::gather("key", "sd", -platform)) %>% 
+  mutate(report = paste0("M=", round(mean, 2), ", SD=", round(sd, 2))) %>% 
+#    mutate(type = "sd")) %>% 
+  mutate(platform = case_when(
+      platform == "fb" ~ "Facebook",
+      platform == "tw" ~ "Twitter",
+      platform == "yt" ~ "YouTube"
+    )
+  ) %>%
+  mutate(key = case_when(
+      key == "anti_fem" ~ "Misogyny and Anti-Feminism",
+      key == "anti_mus" ~ "Anti-Muslim Sentiment",
+      key == "anti_sem" ~ "Anti-Semitism",
+      key == "elite" ~ "Anti-Elite & Conspiracies",
+      key == "identity" ~ "Focus on White Identity",
+      key == "left" ~ "Anti-Left/Liberal Sentiment",
+      key == "moral" ~ "Lamenting about Moral Decline",
+      key == "race" ~ "Racism"
+    )
+  ) %>% 
+  ggplot(aes(platform, mean, color = platform)) +
+  geom_point() +
+  geom_linerange(aes(ymin = mean - sd, ymax = mean + sd)) +
+  geom_text(aes(label = report), nudge_x = 0.3) +
+  facet_wrap(~key, ncol = 2) + 
+  coord_flip() +
+  theme_hc() +
+  ggthemes::scale_color_fivethirtyeight()
+
+table(dt$platform)
+```
+
+---
+
+## Descriptives of Labeled Data
+
+
+```{r, echo = F, fig.width = 10, fig.height=7, fig.align="center"}
+make01 <- function(x) {
+  case_when(x >= 2 ~ 1L,
+            TRUE ~ 0L)
+}
+
+dt %>% 
+  mutate_at(vars(identity:left, anti_fem:anti_mus), make01) %>% 
+  dplyr::select(platform, identity:left, anti_fem:anti_mus) %>% 
+  # group_by(platform) %>% 
+  # summarise(n = n())
+  tidyr::gather("key", "value", -platform) %>% 
+  group_by_at(vars(platform, key)) %>% 
+  count(value) %>% 
+  left_join(dt %>% 
+    group_by(platform) %>% 
+    summarise(total = n())) %>% 
+  mutate(percent = (n/total) * 100) %>% 
+  filter(value == 1) %>% 
+  ungroup() %>% 
+  mutate(platform = case_when(
+      platform == "fb" ~ "Facebook",
+      platform == "tw" ~ "Twitter",
+      platform == "yt" ~ "YouTube"
+    )
+  ) %>%
+  mutate(key = case_when(
+      key == "anti_fem" ~ "Misogyny and Anti-Feminism",
+      key == "anti_mus" ~ "Anti-Muslim Sentiment",
+      key == "anti_sem" ~ "Anti-Semitism",
+      key == "elite" ~ "Anti-Elite & Conspiracies",
+      key == "identity" ~ "Focus on White Identity",
+      key == "left" ~ "Anti-Left/Liberal Sentiment",
+      key == "moral" ~ "Lamenting about Moral Decline",
+      key == "race" ~ "Racism"
+    )
+  ) %>% 
+  ggplot(aes(platform, percent, fill = platform)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~key, ncol = 2) + 
+  theme_hc() +
+  coord_flip() +
+  geom_text(aes(label = paste0(round(percent, 2), "%")), nudge_y = -0.7) +
+  xlab("") + 
+  ylab("Percentage of Comments/Tweets") +
+  guides(fill = F) +
+  ggthemes::scale_color_fivethirtyeight()
+
+
+```
+
+---
+
+## Descriptives of Labeled Data
+
+```{r}
+# 1 illegal
+# 2 nonwestern
+# 3 race
+
+# 1 in general
+# 2 white
+# 3 male
+
+dt %>% 
+  mutate(lang = case_when(
+    lang == 0 ~ "nothing",
+    lang == 1 ~ "Vulgar",
+    lang == 2 ~ "Hostile Language",
+    lang == 3 ~ "Call for Violence"
+  )) %>% 
+  mutate(imm = case_when(
+    imm == 0 ~ "nothing",
+    imm == 1 ~ "illegal",
+    imm == 2 ~ "Anti-Immigration (Non-Western)",
+    imm == 3 ~ "Anti-Immigration (Non-White)"
+  )) %>% 
+  mutate(vict = case_when(
+    vict == 0 ~ "nothing",
+    vict == 1 ~ "in general",
+    vict == 2 ~ "Victimization (White)",
+    vict == 3 ~ "Victimization (Male)"
+  ))  %>% 
+  dplyr::select(platform, lang:vict) %>% 
+  # group_by(platform) %>% 
+  # summarise(n = n())
+  tidyr::gather("key", "value", -platform) %>% 
+  group_by_at(vars(platform, key)) %>% 
+  count(value) %>% 
+  left_join(dt %>% 
+    group_by(platform) %>% 
+    summarise(total = n())) %>% 
+  mutate(percent = (n/total) * 100) %>% 
+  filter(value != "nothing") %>% 
+  filter(value != "illegal") %>% 
+  filter(value != "in general") %>% 
+  ungroup() %>% 
+  mutate(platform = case_when(
+      platform == "fb" ~ "Facebook",
+      platform == "tw" ~ "Twitter",
+      platform == "yt" ~ "YouTube"
+    )
+  ) %>%
+  # mutate(key = case_when(
+  #     key == "anti_fem" ~ "Misogyny and Anti-Feminism",
+  #     key == "anti_mus" ~ "Anti-Muslim Sentiment",
+  #     key == "anti_sem" ~ "Anti-Semitism",
+  #     key == "elite" ~ "Anti-Elite & Conspiracies",
+  #     key == "identity" ~ "Focus on White Identity",
+  #     key == "left" ~ "Anti-Left/Liberal Sentiment",
+  #     key == "moral" ~ "Lamenting about Moral Decline",
+  #     key == "race" ~ "Racism"
+  #   )
+  # ) %>% 
+  ggplot(aes(platform, percent, fill = platform)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~value, ncol = 1) + 
+  theme_hc() +
+  coord_flip() +
+  geom_text(aes(label = paste0(round(percent, 2), "%")), nudge_y = -0.7) +
+  xlab("") + 
+  ylab("Percentage of Comments/Tweets") +
+  guides(fill = F) +
+  ggthemes::scale_color_fivethirtyeight()
+  
+    
+
+```
+
+
+---
+
+## Descripives of Labeled Data
+
+**TODO**
+
+
+---
+
+class: inverse, center, middle
+
+
+## Machine Learning
+
+
+---
+
+## Machine Learning
+
+**TODO**
+
+---
+
+
+class: inverse, center, middle
+
+## Predictive Analysis
+
+
+---
+
+## Predictive Analysis
+
+**TODO**
+
+---
+
+class: inverse, center, middle
+
+
+## Policy Implications
+
+---
+
+
+## Policy Implications
+
+* Counter Narratives
+* Taking complaints about ambiguity of hate speech seriously?
+* Account for the *multidimensionality* of extremism
+    + extremism is not only limited to hate speech, it's also ideological
+* AI deletion: What about uncertainty and ambiguity of language.
+* Human in the loop. 
+* Feeback loop: get personal feedback. Restcricted times.
+* Algorithemn must be repsonsive and transparent on how decisions are made. Highlight problematic content and a reason why. 
+* Cross Checking Algorithemns improve the comprehension of how the system works and we get a chance to critize its blindspots. 
+* More accountable AI programming. 
+
+
+---
+
+class: inverse, center, middle
+
+
+## Thanks for Listening!
+
+[**Data and Code can be found in this GitHub Repository**](https://www.splcenter.org/fighting-hate/extremist-files/ideology/alt-right)
+
+---
+
+## References
+
+Hawley, G. (2017). Making Sense of the Alt-right. Columbia University Press.
+
+Marwick, A., & Lewis, R. (2017). Media manipulation and disinformation online. New York: Data & Society Research Institute.
+
 
 
 ---
 
 
+## Fallbacks
 
-
-
-
-
-
-
-
-
+* Keyword counting
+* Official racesim dictionaries.
+* Network analysis.
+    + Link share network
+    + user community
+* Gender
+* Terror
+* Story tracing/hoax
+  
 
