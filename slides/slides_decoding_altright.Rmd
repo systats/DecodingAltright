@@ -793,9 +793,54 @@ class: inverse, center, middle
 
 ---
 
+## Charlottesville Rallye
+
+
+.pull-left[
+
+
+* Unite the Right Rallye in Charlottesville
+
+
+
+<td style="padding-top: 0.8px;"></td>
+
+* Protests officially against removing a Statue of Robet E. Lee
+
+
+
+<td style="padding-top: 0.8px;"></td>
+
+* Many Alt-Right Figures were present (Richard Spencer, Matthew Heimbach etc.)
+
+
+
+<td style="padding-top: 0.8px;"></td>
+
+* 11th and 12th August of 2017
+
+
+
+<td style="padding-top: 0.8px;"></td>
+
+* Lead to a deliberate attack and death of a counter-protester Heather Heyer
+
+]
+
+.pull-right[
+
+<img src="images/charlotte1.jpg">
+
+<img src="images/charlotte2.jpg">
+
+]
+
+---
+
 ## Predictive Analysis
 
 **TODO**
+
 
 ---
 
