@@ -44,12 +44,32 @@ output:
 # include=FALSE
 options(htmltools.dir.version = FALSE)
 
-pacman::p_load(dplyr, ggplot2, googlesheets, openxlsx, stringr, rvest, dplyr, ggplot2, keras, mlrMBO, tidyMBO, ggthemes, Smisc, randomForest, parallelMap, emoa, xaringan)
+pacman::p_load(dplyr, ggplot2, googlesheets, openxlsx, stringr, rvest, dplyr, ggplot2, keras, mlrMBO, tidyMBO, ggthemes, Smisc, randomForest, parallelMap, emoa, xaringan, tidyTX, d3heatmap)
 
 knitr::opts_chunk$set(echo = F, warning = F, error = F, message = F)
 
 load("data/dt.Rdata")
 ```
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+.onehundredtwenty[
+
+Goal:
+
+> Identify Alt-Right commentary on social media and its spread into mainstream media
+
+]
+
+---
 
 ## Outline
 
@@ -108,11 +128,13 @@ load("data/dt.Rdata")
 2. Data Collection
 3. Coding Framework
 4. Machine Learning
-5. Predictive Analysis
+5. Prelimanary Results
 6. Policy Implications
 ]
 
+
 ---
+
 class: inverse, center, middle
 
 ## Get Started
@@ -251,9 +273,7 @@ The Alt-Right consists of...
 <!-- bps 324.519 Abonnenten -->
 <!-- 791.744 Abonnenten -->
 
-
-
----
+<!-- --- -->
 
 
 <!-- ## Groups of the Alt-Right III -->
@@ -270,11 +290,11 @@ The Alt-Right consists of...
 
 <!-- --- -->
 
-## Alt-Right or Alt-Light
+<!-- ## Alt-Right or Alt-Light -->
 
-Some scholars have made the distinction between Alt-Right and Alt-Light:
+<!-- Some scholars have made the distinction between Alt-Right and Alt-Light: -->
 
-> Media outlets that espouse some far-right talking points while strategically excluding more extreme beliefs such as scientific racism or anti-Semitism. Example: Breitbart News.
+<!-- > Media outlets that espouse some far-right talking points while strategically excluding more extreme beliefs such as scientific racism or anti-Semitism. Example: Breitbart News. -->
 
 
 ---
@@ -285,14 +305,33 @@ class: inverse, center, middle
 
 ---
 
-## Where to find the Alt-Right?
+## What data did collect?
 
 --
 
-* Online Discussion Boards e.g. Reddit, 4chan, Discord.
-* Facebook, Twitter and YouTube 
++ Text data from three Platforms: Facebook, Twitter and YouTube 
 
-For this research we were focused on social media. We collected millions of comment that were left under various Alt-Right network hubs on these platforms for the entirety of the year 2017. In addition, we also accessed the commentaries under popular (American) news outlets over the same timerange.
+<img src="images/socialmedia.png">
+
+--
+
++ Comments from 76 Alt-Right connected profiles/YouTube channels 
+
+--
+
++ Comments from 7 Media Outles (CNN, MSNBC, ABC, Fox News, Washington Post, New York Times)
+
+<img src="images/media.png">
+
+--
+
++ Comments from the entire year 2017
+
+--
+
++ In total over 30 million comments/tweets
+
+
 
 ---
 
@@ -362,6 +401,8 @@ data.frame(platform = "YouTube", pl1 = 3,
 ```{r tally2, echo = F, fig.width = 10, fig.height=7, fig.align="center"}
 load("data/social_media_plot.Rdata")
 
+options(scipen = 999)
+
 social_media_plot %>%
     mutate(page = forcats::fct_recode(page, 
                                     `CNN` = "cnn",
@@ -390,29 +431,41 @@ class: inverse, center, middle
 
 ---
 
-## Sampling & Data Preperation
+## Training Sample
 
-As a first step we sampled 30.000 comments from the Alt-Right sample. We tried to make sure that each YouTube Video, Facebook or Twitter profile is equally represented in this subsample.
+*Our Approach:*
 
-Next, we did some other things to the data?
+--
 
-Goal:
++ Supervised machine learning necessitates a training dataset of labeled comments that the algorithm can learn from
 
-> Identify Alt-Right commentary on social media and its spread into mainstream media
+--
 
-This could include the spread of hoaxes and fake news or Alt-Right reaction to terrorist attacks.
++ A balanced subsample of each YouTube Video, Facebook or Twitter profile from the Alt-Right corpus 
 
-This will be done with a machine learning process that necessitates a training and a test dataset.
+--
 
-In order to account for the multidimensionality of the Alt-Right sphere, we decided to use an extensive coding scheme that we will present with the app.
++ Setting up an extensive coding scheme that accounts for the multidimensionality of the Alt-Right sphere (indicators for racism, anti-semitism etc.)
 
-In total we labeled `r nrow(dt)` comments and tweets with the help of `r length(unique(dt$coder))` individual coders.
+--
+
++ Development of a *Shiny App* that allowed us to outsource the labeling task to `r length(unique(dt$coder))` voluntary coders.
+
+--
+
++  Krippendorf's &alpha shows good intercoder reliablity between first hundred ratings
+
+--
+
++  In total we labeled `r nrow(dt)` comments and tweets.
 
 ---
 
-class: inverse, center, middle
+class: center, middle
 
-[Link to Coding App](https://favstats.shinyapps.io/shiny_label_altright/)
+.onehundredtwenty[
+## Shiny App
+]
 
 ---
 
@@ -445,154 +498,6 @@ class: center, middle
 
 <img src="images/app5.png">
 
----
-
-## Who did we label?
-
-```{r data, echo = F, eval = F}
-googlesheets::gs_auth(token = "shiny_app_token.rds")
-with_label <- gs_title("altright_data_final") %>%
-  gs_read()
-
-clean_slider <- function(x){
-  x %>%
-    str_replace_all("Not Present", "1") %>%
-    str_replace_all("Strongly Present", "5") %>%
-    str_replace_all("99", "0")
-}
-
-df_coded <- with_label %>%
-  filter(!duplicated(text)) %>%
-  arrange(id) %>%
-  purrr::map_df(clean_slider) %>%
-  mutate_at(vars(identity:anti_mus), as.numeric)
-
-dt <- df_coded %>%
-  #dplyr::select(identity:left, anti_fem:anti_mus) %>%
-  #purrr::map_df(.f = ~ifelse(.x == 1, 1, 2)) %>%
-  #cbind(., text = df_coded$text) %>%
-  mutate(text = as.character(text))
-
-#save(dt, file = "data/dt.Rdata")
-```
-
-
-
-```{r tally, echo = F, fig.width = 10, fig.height=7, fig.align="center"}
-load("data/dt.Rdata")
-dt %>%
-  mutate(pl1 = as.numeric(as.factor(platform))) %>%
-  group_by(platform, pl1, page) %>%
-  tally %>%
-  ungroup %>%
-  mutate(page = forcats::fct_reorder(page, pl1)) %>%
-  mutate(platform = case_when(
-      platform == "fb" ~ "Facebook",
-      platform == "tw" ~ "Twitter",
-      platform == "yt" ~ "YouTube"
-    )
-  ) %>%
-  filter(!is.na(page)) %>%
-  arrange(platform, desc(n)) %>%
-  mutate(page = forcats::fct_recode(page, 
-                                    `Milo Yiannopoulos` = "milo",
-                                    `Alex Jones/Infowars` = "alexjones",
-                                    `Mike Cernovich` = "cernovich",
-                                    `Paul Joseph Watson` = "pjw",
-                                    `Breitbart` = "breitbart",
-                                    `Steven Crowder` = "crowder",
-                                    `Rebel Media` = "TheRebelTV",
-                                    `Blaire White` = "blaire_white",
-                                    `Tommy Robinson` = "robinson",
-                                    `Stefan Molyneux/Freedomain Radio` = "molymeme",
-                                    `Red Ice TV` = "redicetv",
-                                    `Black Pigeon Speaks` = "bps",
-                                    `Styxhexenhammer` = "styxenhammer",
-                                    `Lauren Southern` = "lauren",
-                                    `Baked Alaska` = "bakedalaska",
-                                    `Return of Kings` = "returnofkings",
-                                    `VDARE` = "vdare",
-                                    `Roosh V` = "roosh",
-                                    `RamZPaul` = "ramzpaul",
-                                    `Brittany Pettibone` = "pettibone",
-                                    `Arktos Media` = "arktosmedia",
-                                    `Gavin McInnes` = "gavin",
-                                    `The National Policy Institute/Radix Journal` = "NPIRadix",
-                                    `Millenial Woes` = "mw",
-                                    `Roaming Millenial` = "roaming",
-                                    `Richard Spencer` = "richardspencer",
-                                    `Identity Evropa` = "europa",
-                                    `Paul Elam` = "paulelam",
-                                    `AltRight.com` = "altright",
-                                    `Tara McCarthy` = "tara",
-                                    `Counter-Currents` = "countercurr",
-                                    `Ann Coulter` = "anncoulter",
-                                    `American Renaissance` = "americanrenaissance"
-                                    )) %>% 
-  ggplot(aes(page, platform, fill = n)) +
-  geom_tile() +
-  coord_flip() +
-  theme_hc() +
-  theme(legend.position = "right", text = element_text(size = 20, face = "bold")) +
-  viridis::scale_fill_viridis("Number", option = "E", alpha = .5, direction = -1) +
-  labs(x = "", y = "") +
-  scale_y_discrete(position = "top")
-```
-
-
-
-## Reliability and Validation
-
-
-**TODO**
-
----
-
-## Descriptives of Labeled Data
-
-
-```{r, echo = F, fig.width = 10, fig.height=7, fig.align="center"}
-dt %>% 
-  group_by(platform) %>%
-  summarize_all(mean) %>%
-  dplyr::select(platform, identity:left, anti_fem:anti_mus) %>% 
-  tidyr::gather("key", "mean", -platform) %>% 
-#  mutate(type = "mean") %>% 
-  left_join(dt %>% 
-    group_by(platform) %>%
-    summarize_all(sd) %>%
-    dplyr::select(platform, identity:left, anti_fem:anti_mus) %>% 
-    tidyr::gather("key", "sd", -platform)) %>% 
-  mutate(report = paste0("M=", round(mean, 2), ", SD=", round(sd, 2))) %>% 
-#    mutate(type = "sd")) %>% 
-  mutate(platform = case_when(
-      platform == "fb" ~ "Facebook",
-      platform == "tw" ~ "Twitter",
-      platform == "yt" ~ "YouTube"
-    )
-  ) %>%
-  mutate(key = case_when(
-      key == "anti_fem" ~ "Misogyny and Anti-Feminism",
-      key == "anti_mus" ~ "Anti-Muslim Sentiment",
-      key == "anti_sem" ~ "Anti-Semitism",
-      key == "elite" ~ "Anti-Elite & Conspiracies",
-      key == "identity" ~ "Focus on White Identity",
-      key == "left" ~ "Anti-Left/Liberal Sentiment",
-      key == "moral" ~ "Lamenting about Moral Decline",
-      key == "race" ~ "Racism"
-    )
-  ) %>% 
-  ggplot(aes(platform, mean, color = platform)) +
-  geom_point() +
-  geom_linerange(aes(ymin = mean - sd, ymax = mean + sd)) +
-  geom_text(aes(label = report), nudge_x = 0.3) +
-  facet_wrap(~key, ncol = 2) + 
-  coord_flip() +
-  theme_hc() +
-  ggthemes::scale_color_fivethirtyeight()
-
-table(dt$platform)
-```
 
 ---
 
@@ -645,7 +550,9 @@ dt %>%
   xlab("") + 
   ylab("Percentage of Comments/Tweets") +
   guides(fill = F) +
-  ggthemes::scale_color_fivethirtyeight()
+  ggthemes::scale_color_fivethirtyeight() + 
+  labs(caption = "N for each Panel: 7580")
+  
 
 
 ```
@@ -663,6 +570,9 @@ dt %>%
 # 1 in general
 # 2 white
 # 3 male
+
+library(tidyverse)
+load("data/dt.Rdata")
 
 dt %>% 
   mutate(lang = case_when(
@@ -703,6 +613,14 @@ dt %>%
       platform == "yt" ~ "YouTube"
     )
   ) %>%
+  mutate(value = factor(value, levels = c("Vulgar",
+                                          "Hostile Language",
+                                          "Call for Violence",
+                                          "Anti-Immigration (Non-Western)",
+                                          "Anti-Immigration (Non-White)",
+                                          "Victimization (Male)",
+                                          "Victimization (White)"
+                                          ))) %>% 
   # mutate(key = case_when(
   #     key == "anti_fem" ~ "Misogyny and Anti-Feminism",
   #     key == "anti_mus" ~ "Anti-Muslim Sentiment",
@@ -723,7 +641,8 @@ dt %>%
   xlab("") + 
   ylab("Percentage of Comments/Tweets") +
   guides(fill = F) +
-  ggthemes::scale_color_fivethirtyeight()
+  ggthemes::scale_color_fivethirtyeight() + 
+  labs(caption = "N for each Panel: 7580")
   
     
 
@@ -751,8 +670,121 @@ class: inverse, center, middle
 
 **TODO**
 
+.pull-right[
+
+```{r}
+x <- c(1, 0 , 1, 1, 0, 1, 1, 0, 1)
+y <- c(1, 1 ,0, 1, 0, 1, 1, 0, 0)
+
+confusion_real <- function (x, y, lib = "hchart", text_resize = F, info = F, info_list = F, 
+  ...) 
+{
+  mat <- data.frame(preds = x, real = y) %>% dplyr::count(preds, 
+    real) %>% tidyr::spread(key = "real", value = "n") %>% 
+    dplyr::select(-preds) %>% as.matrix()
+  n <- sum(mat)
+  n_class <- nrow(mat)
+  diag <- diag(mat)
+  rowsums <- apply(mat, 1, sum)
+  colsums <- apply(mat, 2, sum)
+  p <- rowsums/n
+  q <- colsums/n
+  acc <- round(sum(diag)/n, 3)
+  precision <- diag/colsums
+  recall <- diag/rowsums
+  f1 <- 2 * precision * recall/(precision + recall)
+  eval <- data.frame(level = 1:length(precision), precision, 
+    recall, f1)
+  if (lib == "gg") {
+    gg <- data.frame(preds = x, real = y) %>% dplyr::count(preds, 
+      real) %>% dplyr::group_by(real) %>% dplyr::mutate(n_real = sum(n)) %>% 
+      ungroup() %>% dplyr::mutate(perc_real = round(n/n_real * 
+      100, 1)) %>% dplyr::mutate(label = paste0(n, "\n", 
+      perc_real, "%")) %>% mutate(preds = factor(preds, 
+      levels = sort(unique(preds), decreasing = T))) %>% 
+      mutate(real = factor(real)) %>% ggplot2::ggplot(ggplot2::aes(real, 
+      preds, fill = n)) + ggplot2::geom_tile(alpha = 0.8) + 
+      viridis::scale_fill_viridis(direction = -1) + scale_x_discrete(position = "top") + 
+      ggthemes::theme_few() + theme(legend.position = "none") + 
+      coord_equal() + labs(x = "Real value y", y = "Predicted value y hat")
+    if (text_resize) {
+      gg <- gg + ggplot2::geom_text(aes(label = label, 
+        size = n))
+    }
+    else {
+      gg <- gg + ggplot2::geom_text(aes(label = label))
+    }
+    if (info) {
+      gg_info <- eval %>% dplyr::mutate_all(function(x) round(x, 
+        3)) %>% tidyr::gather("metric", "value", -level) %>% 
+        dplyr::mutate(level = as.factor(level)) %>% 
+        ggplot2::ggplot(aes(level, value, fill = level)) + 
+        ggplot2::geom_bar(stat = "identity", alpha = 0.7) + 
+        ggplot2::facet_wrap(~metric, ncol = 2) + ggthemes::theme_few() + 
+        ggplot2::labs(x = "", y = "", caption = paste0("Accuracy: ", 
+          acc)) + ggplot2::theme(legend.position = "none")
+      if (!info_list) {
+        scale_fill_party <- function() {
+          ggplot2::scale_fill_manual("", values = c("#46962b", 
+            "#8B1A1A", "#E2001A", "#ffed00", "black"))
+        }
+        gg_grid <- gridExtra::grid.arrange(gg, gg_info + 
+          scale_fill_party(), ncol = 2)
+        return(gg_grid)
+      }
+      else {
+        return(list(gg, gg_info))
+      }
+    }
+  }
+  else if (lib == "plotly") {
+    gg <- data.frame(preds = x, real = y) %>% dplyr::count(preds, 
+      real) %>% dplyr::group_by(real) %>% dplyr::mutate(n_real = sum(n)) %>% 
+      dplyr::ungroup() %>% dplyr::mutate(perc_real = round(n/n_real * 
+      100, 1)) %>% dplyr::mutate(label = paste0(n, "\n", 
+      perc_real, "%")) %>% dplyr::mutate(preds = factor(preds, 
+      levels = sort(unique(preds), decreasing = T))) %>% 
+      dplyr::mutate(real = factor(real)) %>% ggplot2::ggplot(ggplot2::aes(real, 
+      preds, fill = n, text = paste("percent:", perc_real))) + 
+      ggplot2::geom_tile() + viridis::scale_fill_viridis(direction = -1) + 
+      ggplot2::scale_x_discrete(position = "top") + ggthemes::theme_few() + 
+      ggplot2::theme(legend.position = "none") + ggplot2::labs(x = "Real value y", 
+      y = "Predicted value y hat")
+    gg <- plotly::ggplotly(gg)
+  }
+  else if (lib == "hchart") {
+    gg <- mat %>% highcharter::hchart(mat, type = "heatmap", 
+      ...)
+  }
+  else {
+    gg <- mat %>% d3heatmap::d3heatmap(mat, colors = "Spectral", 
+      ...)
+  }
+  return(gg)
+}
+
+
+# library(tidyTX)
+# tidyTX::tx_confusion(x, y)
+
+confusion_real(x, y, lib = "gg") +
+  scale_fill_continuous(low = "gray70", high = "red")
+
+
+```
+
+
+
+
+]
+
 ---
 
+```{r}
+#mat %>% d3heatmap::d3heatmap(mat, colors = "Spectral")
+```
+
+---
 
 class: inverse, center, middle
 

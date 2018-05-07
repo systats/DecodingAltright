@@ -49,6 +49,26 @@ class: center, middle, inverse, title-slide
 
 
 
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+.onehundredtwenty[
+
+Goal:
+
+&gt; Identify Alt-Right commentary on social media and its spread into mainstream media
+
+]
+
+---
+
 ## Outline
 
 .onehundredtwenty[
@@ -106,11 +126,13 @@ class: center, middle, inverse, title-slide
 2. Data Collection
 3. Coding Framework
 4. Machine Learning
-5. Predictive Analysis
+5. Prelimanary Results
 6. Policy Implications
 ]
 
+
 ---
+
 class: inverse, center, middle
 
 ## Get Started
@@ -249,9 +271,7 @@ The Alt-Right consists of...
 &lt;!-- bps 324.519 Abonnenten --&gt;
 &lt;!-- 791.744 Abonnenten --&gt;
 
-
-
----
+&lt;!-- --- --&gt;
 
 
 &lt;!-- ## Groups of the Alt-Right III --&gt;
@@ -268,11 +288,11 @@ The Alt-Right consists of...
 
 &lt;!-- --- --&gt;
 
-## Alt-Right or Alt-Light
+&lt;!-- ## Alt-Right or Alt-Light --&gt;
 
-Some scholars have made the distinction between Alt-Right and Alt-Light:
+&lt;!-- Some scholars have made the distinction between Alt-Right and Alt-Light: --&gt;
 
-&gt; Media outlets that espouse some far-right talking points while strategically excluding more extreme beliefs such as scientific racism or anti-Semitism. Example: Breitbart News.
+&lt;!-- &gt; Media outlets that espouse some far-right talking points while strategically excluding more extreme beliefs such as scientific racism or anti-Semitism. Example: Breitbart News. --&gt;
 
 
 ---
@@ -283,14 +303,33 @@ class: inverse, center, middle
 
 ---
 
-## Where to find the Alt-Right?
+## What data did collect?
 
 --
 
-* Online Discussion Boards e.g. Reddit, 4chan, Discord.
-* Facebook, Twitter and YouTube 
++ Text data from three Platforms: Facebook, Twitter and YouTube 
 
-For this research we were focused on social media. We collected millions of comment that were left under various Alt-Right network hubs on these platforms for the entirety of the year 2017. In addition, we also accessed the commentaries under popular (American) news outlets over the same timerange.
+&lt;img src="images/socialmedia.png"&gt;
+
+--
+
++ Comments from 76 Alt-Right connected profiles/YouTube channels 
+
+--
+
++ Comments from 7 Media Outles (CNN, MSNBC, ABC, Fox News, Washington Post, New York Times)
+
+&lt;img src="images/media.png"&gt;
+
+--
+
++ Comments from the entire year 2017
+
+--
+
++ In total over 30 million comments/tweets
+
+
 
 ---
 
@@ -315,29 +354,41 @@ class: inverse, center, middle
 
 ---
 
-## Sampling &amp; Data Preperation
+## Training Sample
 
-As a first step we sampled 30.000 comments from the Alt-Right sample. We tried to make sure that each YouTube Video, Facebook or Twitter profile is equally represented in this subsample.
+*Our Approach:*
 
-Next, we did some other things to the data?
+--
 
-Goal:
++ Supervised machine learning necessitates a training dataset of labeled comments that the algorithm can learn from
 
-&gt; Identify Alt-Right commentary on social media and its spread into mainstream media
+--
 
-This could include the spread of hoaxes and fake news or Alt-Right reaction to terrorist attacks.
++ A balanced subsample of each YouTube Video, Facebook or Twitter profile from the Alt-Right corpus 
 
-This will be done with a machine learning process that necessitates a training and a test dataset.
+--
 
-In order to account for the multidimensionality of the Alt-Right sphere, we decided to use an extensive coding scheme that we will present with the app.
++ Setting up an extensive coding scheme that accounts for the multidimensionality of the Alt-Right sphere (indicators for racism, anti-semitism etc.)
 
-In total we labeled 7580 comments and tweets with the help of 13 individual coders.
+--
+
++ Development of a *Shiny App* that allowed us to outsource the labeling task to 13 voluntary coders.
+
+--
+
++  Krippendorf's &amp;alpha shows good intercoder reliablity between first hundred ratings
+
+--
+
++  In total we labeled 7580 comments and tweets.
 
 ---
 
-class: inverse, center, middle
+class: center, middle
 
-[Link to Coding App](https://favstats.shinyapps.io/shiny_label_altright/)
+.onehundredtwenty[
+## Shiny App
+]
 
 ---
 
@@ -370,22 +421,6 @@ class: center, middle
 
 &lt;img src="images/app5.png"&gt;
 
----
-
-## Who did we label?
-
-
-
-
-
-&lt;img src="slides_decoding_altright_files/figure-html/tally-1.png" style="display: block; margin: auto;" /&gt;
-
-
-
-## Reliability and Validation
-
-
-**TODO**
 
 ---
 
@@ -394,25 +429,12 @@ class: center, middle
 
 &lt;img src="slides_decoding_altright_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
 
-```
-## 
-##   fb   tw   yt 
-## 1751 2728 3101
-```
-
 ---
 
-## Descriptives of Labeled Data
 
+## Descriptives of Labeled Data
 
 &lt;img src="slides_decoding_altright_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-
-## Descriptives of Labeled Data
-
-&lt;img src="slides_decoding_altright_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -436,8 +458,20 @@ class: inverse, center, middle
 
 **TODO**
 
+.pull-right[
+
+![](slides_decoding_altright_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+
+
+
+]
+
 ---
 
+
+
+---
 
 class: inverse, center, middle
 
