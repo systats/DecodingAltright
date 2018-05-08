@@ -128,7 +128,7 @@ Goal:
 2. Data Collection
 3. Coding Framework
 4. Machine Learning
-5. Prelimanary Results
+5. Case Study: Unite the Right Charlottesville Rally
 6. Policy Implications
 ]
 
@@ -412,6 +412,8 @@ social_media_plot %>%
                                     `Washington Post` = "wapo",
                                     `Fox News` = "foxnews"
                                     )) %>% 
+  filter(!(page == "ABC" & platform == "YouTube")) %>% 
+  filter(!(page == "MSNBC" & platform == "YouTube")) %>% 
   ggplot(aes(page, platform, fill = n)) +
   geom_tile() +
   coord_flip() +
@@ -453,7 +455,7 @@ class: inverse, center, middle
 
 --
 
-+  Krippendorf's &alpha shows good intercoder reliablity between first hundred ratings
++  Krippendorf's	&alpha; shows intercoder reliablity of around .5 (increases after burn-in phase)
 
 --
 
@@ -788,12 +790,12 @@ confusion_real(x, y, lib = "gg") +
 
 class: inverse, center, middle
 
-## Predictive Analysis
-
+## Case Study: 
+### Unite the Right Charlottesville Rally
 
 ---
 
-## Charlottesville Rallye
+## Case Study: Unite the Right Charlottesville Rally
 
 
 .pull-left[
@@ -803,25 +805,25 @@ class: inverse, center, middle
 
 
 
-<td style="padding-top: 0.8px;"></td>
+<td style="padding-top: 1.5px;"></td>
 
 * Protests officially against removing a Statue of Robet E. Lee
 
 
 
-<td style="padding-top: 0.8px;"></td>
+<td style="padding-top: 1.5px;"></td>
 
 * Many Alt-Right Figures were present (Richard Spencer, Matthew Heimbach etc.)
 
 
 
-<td style="padding-top: 0.8px;"></td>
+<td style="padding-top: 1.5px;"></td>
 
 * 11th and 12th August of 2017
 
 
 
-<td style="padding-top: 0.8px;"></td>
+<td style="padding-top: 1.5px;"></td>
 
 * Lead to a deliberate attack and death of a counter-protester Heather Heyer
 
@@ -837,12 +839,24 @@ class: inverse, center, middle
 
 ---
 
-## Predictive Analysis
+## Case Study: Unite the Right Charlottesville Rally
+
+Possible other applications:
+
+* How does the Alt-Right react after terror attacks
+* Tracking stories and misinformation (like the hoax that two Syrian refugees were responsible for the Quebec Mosque Attack)
+* Distinguishing between Alt-Light and Alt-Right content
+
+---
+
+
+
+## Case Study: Unite the Right Charlottesville Rally
 
 **TODO**
 
-
 ---
+
 
 class: inverse, center, middle
 
@@ -854,16 +868,21 @@ class: inverse, center, middle
 
 ## Policy Implications
 
-* Counter Narratives
-* Taking complaints about ambiguity of hate speech seriously?
 * Account for the *multidimensionality* of extremism
     + extremism is not only limited to hate speech, it's also ideological
-* AI deletion: What about uncertainty and ambiguity of language.
-* Human in the loop. 
-* Feeback loop: get personal feedback. Restcricted times.
-* Algorithemn must be repsonsive and transparent on how decisions are made. Highlight problematic content and a reason why. 
-* Cross Checking Algorithemns improve the comprehension of how the system works and we get a chance to critize its blindspots. 
-* More accountable AI programming. 
+* More accountable AI programming:
+    * AI deletion: What about uncertainty and ambiguity of language.
+    * Human in the loop. 
+    * Feedback loop: get personal feedback. Restcricted times.
+    * Algorithm must be repsonsive and transparent on how decisions are made. 
+    + Highlight problematic content and a reason why. 
+    * Cross-checking algorithms improve the comprehension of how the system works and we get a chance to critize its blindspots
+
+* Counter Narratives
+
+* Taking complaints about ambiguity of hate speech seriously
+
+
 
 
 ---
